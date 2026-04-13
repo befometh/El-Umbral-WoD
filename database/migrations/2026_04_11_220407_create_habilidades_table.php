@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('habilidades', function (Blueprint $table) {
             $table->id();
             $table->string('nombre'); // Ej: "Alerta", "Armas de Fuego"
-            // Usamos string para el tipo: 'talento', 'tecnica' o 'conocimiento'
-            $table->string('tipo');
+            // Usamos un entero para definir: 1 => 'talento', 2 => 'tecnica' o 3 => 'conocimiento',
+            $table->tinyInteger('tipo');
+            $table->text('descripcion')->nullable();
+            $table->boolean('visible')->default(false);
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('habilidads');
+        Schema::dropIfExists('habilidades');
     }
 };

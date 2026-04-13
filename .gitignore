@@ -24,9 +24,11 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 
+## Añadidos por Cris
 # JetBrains (IntelliJ IDEA, PhpStorm, etc.)
 .idea/
 *.iws
 *.iml
 *.ipr
 /out/
+/database/add

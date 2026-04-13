@@ -27,3 +27,8 @@ Para ejecutar este proyecto en local (probado en Arch Linux):
 
 ## 📖 Notas de Autoría
 Proyecto desarrollado como parte del ciclo de **Desarrollo de Aplicaciones Web (DAW)**. Orientado a la automatización de reglas de V20 y soporte para personajes baja generación, (Niveles de estadísticas más altos).
+
+## 🔮 Hoja de Ruta (Roadmap)
+Aunque el núcleo actual está centrado en **Vampiro: La Mascarada (V20)**, la arquitectura del sistema se ha diseñado para ser compatible en el futuro con:
+- [ ] **Mago: La Ascensión (M20):** Implementación de Esferas y Quintaesencia.
+- [ ] **Hombre Lobo: El Apocalipsis (W20):** Gestión de Formas, Dones y Rabia.

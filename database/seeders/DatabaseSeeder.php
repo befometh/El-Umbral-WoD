@@ -21,5 +21,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        //Inclusión de las clases del del motor
+        $this->call([
+            HabilidadesSeeder::class,
+        ]);
     }
 }

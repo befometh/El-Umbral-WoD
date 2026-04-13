@@ -45,5 +45,10 @@ class Personaje extends Model
         ->where('nombre', $nomHabilidad)
         ->first();
         return $habilidad?$habilidad->pivot->nivel:0;
-}
+    }
+
+    public function iniciativa(): int{
+        return $this->destreza + $this->astucia;
+    }
+
 }
