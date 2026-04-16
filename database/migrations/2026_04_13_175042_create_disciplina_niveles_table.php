@@ -18,9 +18,9 @@ return new class extends Migration
             $table->integer('nivel');
             $table->string('nombre');
             $table->text('descripcion')->nullable(); //Descripción del punto de disciplina
-            $table->text('sistema')->nullable(); //Sistema aplicado, (solo informativo)
+            $table->text('sistema')->nullable(); //Sistema teórico, (solo informativo)
 
-            // --- EL MOTOR LÓGICO ---
+            // --- EL MOTOR LÓGICO: Sistema aplicado ---
             // Array de strings: ["percepción", "atletismo", "nivel_disciplina", etc.]
             $table->json('pool_dados_lanzados')->nullable();
 
@@ -62,6 +62,16 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+
+    /**
+     * TODO: Implementación de Disciplinas Híbridas (Combo Disciplines)
+     * Actualmente se gestiona mediante el campo JSON 'requisitos_hibridos'
+     * en la tabla 'disciplina_niveles' para simplificar la arquitectura inicial.
+     * * IDEA FUTURA:
+     * Si la complejidad aumenta, migrar a una tabla pivote 'disciplina_nivel_requisitos'
+     * para permitir relaciones N:M entre niveles de distintas disciplinas y
+     * facilitar las consultas del "Mostrario" en el Frontend.
+     */
 
     /**
      * Reverse the migrations.

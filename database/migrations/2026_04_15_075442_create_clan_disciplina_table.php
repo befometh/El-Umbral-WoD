@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clan_disciplina', function (Blueprint $table) {
+        /* Tabla creada para vincular a cada clan con sus disciplinas nativas, que salvo los Caitiff todos tienen alguna
+         *
+         */
+        Schema::create('clan_disciplinas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('clan_id')->constrained();
-            $table->foreignId('disciplina_id')->constrained();
+            $table->foreignId('clan_id')->constrained('clanes')->onDelete('cascade');
+            $table->foreignId('disciplina_id')->constrained()->onDelete('cascade');
 
-            //Un booleano que determina si una disciplina es nativa de clan o no, (para costes de experiencia menores)
-            $table->boolean('pertenece_clan')->default(true);
             $table->timestamps();
         });
     }
