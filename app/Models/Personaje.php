@@ -124,4 +124,63 @@ class Personaje extends Model
             ];
         });
     }
+
+    /* Esta parte del código se basa en una regla del juego, el vampiro es más poderoso entre más se acerque su linaje a Caín
+     * Y puede albergar más capacidad de sangre. La información se puede obtener de las reglas de potencia de sangre de
+     * Vampiro 20 Aniversario
+     *
+     */
+    public function maximoReservaSangre(): int
+    {
+        // Usamos el nombre del clan para diferenciar tipos de seres
+        $nombreClan = $this->clan->nombre;
+
+        if ($nombreClan === 'Ghoul') {
+            return 2;
+        }
+
+        if ($nombreClan === 'Aparecido') {
+            return 10;
+        }
+
+        // Lógica para Vampiros (Tu fórmula híbrida)
+        return match ($this->generacion) {
+            9 => 14,
+            8 => 15,
+            7, 6, 5, 4 => 20 + (10 * (7 - $this->generacion)),
+            default => 10,
+        };
+    }
+
+   /* Esta parte del código se basa en una regla del juego, el vampiro es más poderoso entre más se acerque su linaje a
+    * Caín, el primer vampiro, y puede usar más puntos de su sangre por turno. La información se puede obtener de las reglas
+    * de potencia de sangre de Vampiro 20 Aniversario
+    *
+    */
+    public function gastoMaxPorTurno(): int
+    {
+        $nombreClan = $this->clan->nombre;
+
+        // Ghouls y Aparecidos siempre gastan máximo 1
+        if (in_array($nombreClan, ['Ghoul', 'Aparecido'])) {
+            return 1;
+        }
+
+        // Tabla de gasto para vampiros según V20
+        return match ($this->generacion) {
+            9 => 2,
+            8 => 3,
+            7 => 4,
+            6 => 6,
+            5 => 8,
+            4 => 10,
+            default => 1,
+        };
+    }
+
+    /**
+     * Obtiene la debilidad del personaje.
+     * Si es un Ghoul, hereda la del clan de su amo.
+     */
+
 }

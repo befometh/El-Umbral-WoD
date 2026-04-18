@@ -9,6 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
     public function up(): void
     {
         Schema::create('clanes', function (Blueprint $table) {
@@ -24,7 +25,7 @@ return new class extends Migration
             /* Según qué clanes descienden de otros, por ejemplo los Malkavian (Antitribu) que descienden de los base
              * por utilidad vamos a autoreferenciar un posible clan padre, si es linea principal = nulo
              */
-            $table->foreignId('clan_padre_id')->nullable()->constrained();
+            $table->foreignId('clan_padre_id')->nullable()->constrained('clanes')->nullOnDelete();
 
             $table->text('debilidad')->nullable();
             $table->boolean('visible')->default(false);
@@ -38,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clans');
+        Schema::dropIfExists('clanes');
     }
 };
