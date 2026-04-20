@@ -56,9 +56,9 @@ class Clan extends Model
 
             if (!empty($debilidadPadre)) {
                 if (!empty($debilidad)) {
-                    $debilidad .= "\nTambién hereda la de su clan padre {$clanPadre->nombre}: " . $debilidadPadre;
+                    $debilidad .= "\nTambién hereda la de su Domitor {$clanPadre->nombre}: " . $debilidadPadre;
                 } else {
-                    $debilidad = "Hereda la de su clan padre {$clanPadre->nombre}: " . $debilidadPadre;
+                    $debilidad = "Hereda la de su Domitor {$clanPadre->nombre}: " . $debilidadPadre;
                 }
             }
         }

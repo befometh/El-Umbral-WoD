@@ -14,6 +14,13 @@ class Personaje extends Model
         'percepcion', 'inteligencia', 'astucia',
         'salud_actual', 'reserva_sangre_max', 'reserva_sangre_actual'
 ];
+    //Función que hace que los datos siempre se reciban en orden alfabético
+    protected static function booted() {
+        static::addGlobalScope('orderByName', function ($builder) {
+            $builder->orderBy('nombre','asc');
+        });
+    }
+
     public function usuario() : BelongsTo{
         return $this->belongsTo(User::class, 'user_id');
     }

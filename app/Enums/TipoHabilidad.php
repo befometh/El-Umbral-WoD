@@ -17,4 +17,8 @@ enum TipoHabilidad: int
             self::CONOCIMIENTO => 'Conocimiento',
         };
     }
+    public static function labels(): array
+    {
+        return array_map(fn($t) => $t->label(), self::cases());
+    }
 }
