@@ -24,12 +24,29 @@ class DisciplinasSeeder extends Seeder
         $disciplinas = json_decode($json, true);
 
         foreach($disciplinas as $disciplina) {
-            Disciplina::create([
+            $nuevaDisciplina = Disciplina::create([
                 'nombre' => $disciplina['nombre'],
                 'descripcion' => $disciplina['descripcion'],
                 'visible' => $disciplina['visible']??false,
-                'logo' => $disciplina['logo']??$this->rutaDefault
-            ]);
+                'logo' => $disciplina['logo']??$this->rutaDefault            ]);
+
+            if(isset($disciplina['puntos']) && is_array($disciplina['puntos'])) {
+                foreach($disciplina['puntos'] as $punto) {
+                    $nuevaDisciplina -> puntos()->create([
+                        'nombre' => $punto['nombre'],
+                        'nivel' => $punto['nivel'],
+                        'descripcion' => $punto['descripcion'] ?? null,
+                        'sistema' => $punto['sistema'] ?? null,
+                        'pool_dados_lanzados' => $punto['pool_dados_lanzados'] ?? null,
+                        'pool_stats_pasivos' => $punto['pool_stats_pasivos'] ?? null,
+                        'pool_stats_activos' => $punto['pool_stats_activos']?? null,
+                        'comportamiento' => $punto['comportamiento'],
+                        'duracion' => $punto['duracion'],
+                        'costes' => $punto['costes']??null,
+                        'msj_info' => $punto['msj_info']??null,
+                        'visible' => $punto['visible']??false,
+                    ]);
+                }            }
         }
         dump("Se ha creado la lista de habilidades con éxito");
     }

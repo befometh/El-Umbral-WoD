@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
         //Inclusión de las clases del del motor
         $this->call([
             HabilidadesSeeder::class,
+            DisciplinasSeeder::class,
+            ClanesSeeder::class,
         ]);
     }
 }

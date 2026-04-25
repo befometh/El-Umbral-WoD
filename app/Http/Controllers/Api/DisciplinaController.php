@@ -5,12 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Disciplina;
 use Illuminate\Http\JsonResponse;
-use function PHPUnit\Framework\isEmpty;
 
 class DisciplinaController extends Controller
 {
     public function index(): JsonResponse{
-        return response()->json(Disciplina::where('visible', true)->get());
+        return response()->json(Disciplina::where('visible', false)->get());
     }
 
     public function show(int $id): JsonResponse{
@@ -31,7 +30,7 @@ class DisciplinaController extends Controller
 
         //3. Traemos sus niveles asociados desde DisciplinaNiveles, los llamaremos puntos, ya que en el juego se representa
         //con eso mismo
-        $puntos = $disciplina->PuntosAdquiridos($nivel);
+        $puntos = $disciplina->puntosAdquiridos($nivel);
 
         //Enviamos la información completa
         return response()->json([
@@ -42,7 +41,7 @@ class DisciplinaController extends Controller
                 'logo' => $disciplina->logo,
                 'nivel_adquirido' => $nivel,
                 //Si está vacío y no se han asignado puntos enviamos un mensaje
-                'puntos' => isEmpty($puntos)?'Aún no se han asignado puntos a esta disciplina': $puntos
+                'puntos' => empty($puntos)?'Aún no se han asignado puntos a esta disciplina': $puntos
             ]
         ]);
     }

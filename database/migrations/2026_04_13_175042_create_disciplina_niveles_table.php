@@ -21,7 +21,8 @@ return new class extends Migration
             $table->text('sistema')->nullable(); //Sistema teórico, (solo informativo)
 
             // --- EL MOTOR LÓGICO: Sistema aplicado ---
-            // Array de strings: ["percepción", "atletismo", "nivel_disciplina", etc.]
+            // Array de strings: ["percepción", "atletismo", "nivel_disciplina", etc., el número en solitario
+            // indica la dificultad de la tirada]
             $table->json('pool_dados_lanzados')->nullable();
 
             // Objeto: {"fuerza": 1} -> Stats cuando  suma cuando la disciplina está inactiva
@@ -47,15 +48,16 @@ return new class extends Migration
             $table->tinyInteger('duracion')->default(1)->nullable();
 
             /* Array de objetos: [{"tipo": 1, "valor": 1}, {"tipo": 2, "valor": 1}] según esta lista:
-             * -Tipo 1: Puntos de sangre
-             * -Tipo 2: Puntos de Fuerza de Voluntad Temporal
-             * -Tipo 3: Puntos de Fuerza de Voluntad Permanentes
+             * -sangre: Puntos de sangre
+             * -fdv: Puntos de Fuerza de Voluntad Temporal
+             * -fdvp: Puntos de Fuerza de Voluntad Permanentes
              *
              * Cantidad: coste en cantidad de puntos respectivos gastados
              */
             $table->json('costes')->nullable();
 
-            // Array de strings: ["$personaje ha liberado sus garras, $personaje fuerza a quemar la sangre de $victima, etc."]
+            // Array de strings: Información en pantalla: ["$personaje ha liberado sus garras,
+            // $personaje fuerza a quemar la sangre de $objetivog, etc."]
             $table->json('msj_info')->nullable();
             $table->boolean('visible')->default(false);
 

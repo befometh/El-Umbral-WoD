@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\JsonResponse;
+use function PHPUnit\Framework\isEmpty;
 
 class Disciplina extends Model
 {
@@ -19,11 +21,11 @@ class Disciplina extends Model
     }
 
     /*
-     * Esta es una modificación de la función anterior donde se filtrarían aquellos poderes que el personaje ha adquirido
+     * Relación con la disciplina si tiene el nivel adquirido, entrega un array de los puntos adquiridos
      */
-    public function PuntosAdquiridos(int $nivel) {
+    public function puntosAdquiridos(int $nivel):array {
         return $this->Puntos()->where('nivel','<=', $nivel)
             ->orderBy('nivel', 'asc')
-            ->get();
+            ->get()->toArray();
     }
 }
