@@ -1,14 +1,16 @@
 <?php
 use App\Http\Controllers\Api\ClanController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DisciplinaController;
 use App\Http\Controllers\Api\HabilidadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-//Ruta por defecto
+//Rutas de Usuario:
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+Route::post('/login', [AuthController::class, 'login']);
 
 //Rutas creadas para el proyecto Umbral-Wod
 Route::get('/clanes', [ClanController::class, 'index']);

@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->statefulApi(); //Permite que Sanctum pueda leer estados y tokens
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

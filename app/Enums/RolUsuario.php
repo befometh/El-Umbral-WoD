@@ -1,7 +1,7 @@
 <?php
 namespace App\Enums;
 
-enum rolUsuario: int
+enum RolUsuario: int
 {
     case ANTEDILUVIANO = 1;
     case MATUSALEN = 2;
